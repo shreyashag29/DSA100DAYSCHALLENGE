@@ -1,36 +1,34 @@
-/*Problem: Read a string and check if it is a palindrome using two-pointer comparison.
-
-Input:
-- Single line: string s
-
-Output:
-- Print YES if palindrome, otherwise NO
-
-Example:
-Input:
-level
-
-Output:
-YES
-
-Explanation: String reads same forwards and backwards*/
 #include <stdio.h>
 #include <string.h>
+
 int main()
 {
     char string[100];
     fgets(string, sizeof(string), stdin);
+
     int length = strlen(string);
-    length -= 1;
-    for (int i = 0; i < (strlen(string) - 1); i++)
+
+    // remove newline if present
+    if (string[length - 1] == '\n')
     {
-        if (string[i] != string[length - 1])
+        string[length - 1] = '\0';
+        length--;
+    }
+
+    int left = 0;
+    int right = length - 1;
+
+    while (left < right)
+    {
+        if (string[left] != string[right])
         {
             printf("NO");
             return 0;
         }
-        length -= 1;
+        left++;
+        right--;
     }
+
     printf("YES");
     return 0;
 }
